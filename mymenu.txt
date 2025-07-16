@@ -1,0 +1,61 @@
+while true;
+do
+echo "hi please choose an option from 1 to 5"
+echo "1.Add User"
+echo "2.Remove User"
+echo "3.Update Password for Current User"
+echo "4.List All Actual Users And Count Them"
+echo "5.Exit"
+echo "please enter you option a single num from1 to 5 :)"
+read choice
+case $choice in
+1)
+echo "Enter the username you want to add"
+read username
+sudo adduser "$username"
+if [ $? -eq 0 ]; then
+echo "user added successfully :)"
+else
+echo "failed to add user"
+fi
+;;
+
+2)
+echo "Enter the username you want to remove"
+read userremove
+sudo deluser "$userremove"
+if [ $? -eq 0 ]; then
+echo "user deleted succesfully"
+else
+echo "failed to delete user"
+fi
+;;
+
+3)
+echo "Enter the username you want to change the password for"
+read userpass
+sudo passwd "$userpass"
+if [ $? -eq 0 ]; then
+echo "password updated successfully"
+else
+echo "failed to update password :("
+fi
+;;
+
+4)
+echo "List Of Users"
+cat /etc/passwd
+echo "Users Count = "
+cat /etc/passwd | wc-l
+;;
+
+5)
+echo "bey :("
+exit 0
+;;
+
+*)
+echo "Invalid Num Enter A num Between 1 And 5"
+;;
+esac
+done
